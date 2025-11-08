@@ -6,191 +6,141 @@ import matplotlib.pyplot as plt
 # Streamlit implemenation
 st.title("CSI 5810: Superconductivity Temperature Prediction App")
 st.subheader("Atomic Mass Graphs")
+st.set_page_config(initial_sidebar_state="expanded")
+
+def default():
+    # Data Imported
+    train_Data = pd.read_csv("train.csv")
+    unique_m_Data = pd.read_csv("unique_m.csv")
+
+    # train.csv
+        # Details:
+    print(train_Data.head())
+    print("Train Header Column Names:")
+    print(list(train_Data.columns))
+
+    # unique_m.csv
+        # Details: 
+    print(unique_m_Data.head())
+    # ------------------------------------------------------------------------------------------------ #
+    # Atomic Mass (Red)
+        # Description: 
+    
+    def histogram(column, feature):
+        if column in train_Data.columns:
+            st.subheader(f"{feature}")
+            fig, ax = plt.subplots()
+            ax.hist(train_Data[column], bins = 40, color="red")
+            ax.set_xlabel(feature)
+            ax.set_ylabel("Number of Occurences")
+            ax.set_title(f"Frequency of {feature}")
+            st.pyplot(fig)
+        else:
+            st.error("WRONG")
+        
+    histogram("mean_atomic_mass", "Mean - Atomic Mass")
+    histogram("wtd_mean_atomic_mass", "Weighted Mean - Atomic Mass")
+    histogram("gmean_atomic_mass", "Geometric Mean - Atomic Mass")
+    histogram("wtd_gmean_atomic_mass", "Weighted Geometric Mean - Atomic Mass")
+    histogram("entropy_atomic_mass", "Entropy - Atomic Mass")
+    histogram("wtd_entropy_atomic_mass", "Weighted Entropy - Atomic Mass")
+    histogram("range_atomic_mass", "Range - Atomic Mass")
+    histogram("wtd_range_atomic_mass", " Weighted Range Atomic Mass")
+    histogram("std_atomic_mass", "Standard Deviation - Atomic Mass")
+    histogram("wtd_std_atomic_mass", "Weighted Standard Deviation - Atomic Mass")
+
+default()
+
+def go_mass(): 
+    plt.close("all")
+    st.session_state.page = "app"
+
+def go_fie(): 
+    plt.close("all")
+    st.session_state.page = "fie"
+
+def go_radius(): 
+    plt.close("all")
+    st.session_state.page = "atomicradius"
+
+def go_density(): 
+    plt.close("all")
+    st.session_state.page = "density"
+    
+
+def go_electron(): 
+    plt.close("all")
+    st.session_state.page = "electronaffinity"
+
+def go_fusion(): 
+    plt.close("all")
+    st.session_state.page = "fusionheat"
+
+def go_thermal(): 
+    plt.close("all")
+    st.session_state.page = "thermalconduc"
+
+def go_valence(): 
+    plt.close("all")
+    st.session_state.page = "valence"
+
+def go_ct():
+    plt.close("all")
+    st.session_state.page = "ct"
+
+def go_lg():
+    plt.close("all")
+    st.session_state.page = "lg"
 
 # Side Bar Navigation
 st.sidebar.title("Graphs Broken Down")
-st.set_page_config(initial_sidebar_state="expanded")
+st.sidebar.button("Atomic Mass", key = "mass", on_click=go_mass)
+st.sidebar.button("FIE", key = "fie", on_click=go_fie)
+st.sidebar.button("Atomic Radius", key = "radius", on_click=go_radius)
+st.sidebar.button("Density", key = "den", on_click=go_density)
+st.sidebar.button("Electron Affinity", key = "ea", on_click= go_electron)
+st.sidebar.button("Fusion Heat", key = "fus", on_click=go_fusion)
+st.sidebar.button("Thermal Conductvitiy", key = "thermal",on_click=go_thermal)
+st.sidebar.button("Valence", key = "val", on_click=go_valence)
+st.sidebar.button("Critical Temperature", key = "ct", on_click=go_ct)
+st.sidebar.button("Logic Regression Graphs", key = "lg", on_click=go_lg)
 
-def go_mass(): st.session_state.page = "app"
-st.sidebar.button("Atomic Mass", key = "mass", on_click="app")
+# Loading Pages
+if "page" not in st.session_state:
+    default()
 
-def go_fie(): st.session_state.page = "fie"
-st.sidebar.button("FIE", key = "fie", on_click="fie")
+elif st.session_state.page == "fie":
+    from fie import fie_page
+    fie_page()
 
-def go_radius(): st.session_state.page = "atomicradius"
-st.sidebar.button("Atomic Radius", key = "radius", on_click= "atomicradius")
+elif st.session_state.page == "atomicradius":
+    from atomicradius import rad_page
+    rad_page()
 
-def go_density(): st.session_state.page = "density"
-st.sidebar.button("Density", key = "den")
-
-def go_electron(): st.session_state.page = "electronaffinity"
-st.sidebar.button("Electron Affinity", key = "ea")
-
-def go_fusion(): st.session_state.page = "fusionheat"
-st.sidebar.button("Fusion Heat", key = "fus")
-
-def go_thermal(): st.session_state.page = "thermalconduc"
-st.sidebar.button("Thermal Conductvitiy", key = "thermal")
-
-def go_valence(): st.session_state.page = "valence"
-st.sidebar.button("Valence", key = "val")
-
-st.sidebar.button("Logic Regression Graphs")
-
-# Data Imported
-train_Data = pd.read_csv("train.csv")
-unique_m_Data = pd.read_csv("unique_m.csv")
-
-# train.csv
-    # Details:
-print(train_Data.head())
-print("Train Header Column Names:")
-print(list(train_Data.columns))
-
-# unique_m.csv
-    # Details: 
-print(unique_m_Data.head())
-
-# ------------------------------------------------------------------------------------------------ #
-# Atomic Mass (Red)
-    # Description: 
+elif st.session_state.page == "density":
+    from density import density_page
+    density_page()
     
-# Graph 1 Feature: Mean Atomic Mass
-if "mean_atomic_mass" in train_Data.columns:
-    st.subheader("Mean - Atomic Mass")
-    fig, ax = plt.subplots()
-    ax.hist(train_Data["mean_atomic_mass"], bins = 40, color="red")
-    ax.set_xlabel("Mean - Atomic Mass")
-    ax.set_ylabel("Number of Occurences")
-    ax.set_title("Frequency of Mean Atomic Mass")
+elif st.session_state.page == "electronaffinity":
+    from electronaffinity import electron_page
+    electron_page()
+
+elif st.session_state.page == "fusionheat":
+    from fusionheat import fusion_page
+    fusion_page()
     
-    st.pyplot(fig)
-
-else:
-    st.error("WRONG")
-
-# Graph 2 Feature: Weighted Mean
-if "wtd_mean_atomic_mass" in train_Data.columns:
-    st.subheader("Weighted Mean - Atomic Mass")
-    fig, ax = plt.subplots()
-    ax.hist(train_Data["wtd_mean_atomic_mass"], bins = 40, color="red")
-    ax.set_xlabel("Weighted Mean - Atomic Mass")
-    ax.set_ylabel("Number of Occurences")
-    ax.set_title("Frequency of Weighted Mean Atomic Mass")
+elif st.session_state.page == "thermalconduc":
+    from thermalconduc import thermal_page
+    thermal_page()
     
-    st.pyplot(fig)
+elif st.session_state.page == "valence":
+    from valence import valence_page
+    valence_page()
 
-else:
-    st.error("WRONG")
+elif st.session_state.page == "ct":
+    from cricticaltemp import ct_page
+    ct_page()
 
-# Graph 3 Feature: Geometric Mean
-if "gmean_atomic_mass" in train_Data.columns:
-    st.subheader("Geometric Mean - Atomic Mass")
-    fig, ax = plt.subplots()
-    ax.hist(train_Data["gmean_atomic_mass"], bins = 40, color="red")
-    ax.set_xlabel("Geometric Mean - Atomic Mass")
-    ax.set_ylabel("Number of Occurences")
-    ax.set_title("Frequency of Geometric Mean Atomic Mass")
-    
-    st.pyplot(fig)
-
-else:
-    st.error("WRONG")
-    
-# Graph 4 Feature: Weighted Geometric Mean
-if "wtd_gmean_atomic_mass" in train_Data.columns:
-    st.subheader("Weighted Geometric Mean - Atomic Mass")
-    fig, ax = plt.subplots()
-    ax.hist(train_Data["wtd_gmean_atomic_mass"], bins = 40, color="red")
-    ax.set_xlabel("Weighted Geomtric Mean - Atomic Mass")
-    ax.set_ylabel("Number of Occurences")
-    ax.set_title("Frequency of Weighted Geometric Mean Atomic Mass")
-    
-    st.pyplot(fig)
-
-else:
-    st.error("WRONG")
-
-# Graph 5 Feature: Entropy
-if "entropy_atomic_mass" in train_Data.columns:
-    st.subheader("Entropy - Atomic Mass")
-    fig, ax = plt.subplots()
-    ax.hist(train_Data["entropy_atomic_mass"], bins = 40, color="red")
-    ax.set_xlabel("Entropy - Atomic Mass")
-    ax.set_ylabel("Number of Occurences")
-    ax.set_title("Frequency of Entropy - Atomic Mass")
-    
-    st.pyplot(fig)
-
-else:
-    st.error("WRONG")
-
-# Graph 6 Feature:Weighted Entropy
-if "wtd_entropy_atomic_mass" in train_Data.columns:
-    st.subheader("Weighted Entropy - Atomic Mass")
-    fig, ax = plt.subplots()
-    ax.hist(train_Data["wtd_entropy_atomic_mass"], bins = 40, color="red")
-    ax.set_xlabel("Weighted Entropy - Atomic Mass")
-    ax.set_ylabel("Number of Occurences")
-    ax.set_title("Frequency of Weighted Entropy - Atomic Mass")
-    
-    st.pyplot(fig)
-
-else:
-    st.error("WRONG")
-
-# Graph 7 Feature:Range
-if "range_atomic_mass" in train_Data.columns:
-    st.subheader("Range - Atomic Mass")
-    fig, ax = plt.subplots()
-    ax.hist(train_Data["range_atomic_mass"], bins = 40, color="red")
-    ax.set_xlabel("Range - Atomic Mass")
-    ax.set_ylabel("Number of Occurences")
-    ax.set_title("Frequency of Range - Atomic Mass")
-    
-    st.pyplot(fig)
-
-else:
-    st.error("WRONG")
-
-# Graph 8 Feature:Weighted Range
-if "wtd_range_atomic_mass" in train_Data.columns:
-    st.subheader("Weighted Range - Atomic Mass")
-    fig, ax = plt.subplots()
-    ax.hist(train_Data["wtd_range_atomic_mass"], bins = 40, color="red")
-    ax.set_xlabel("Weighted Range - Atomic Mass")
-    ax.set_ylabel("Number of Occurences")
-    ax.set_title("Frequency of Weighted Range - Atomic Mass")
-    
-    st.pyplot(fig)
-
-else:
-    st.error("WRONG")
-
-# Graph 9 Feature:Standard Deviation
-if "std_atomic_mass" in train_Data.columns:
-    st.subheader("Standard Deviation - Atomic Mass")
-    fig, ax = plt.subplots()
-    ax.hist(train_Data["wtd_mean_atomic_mass"], bins = 40, color="red")
-    ax.set_xlabel("Weighted Mean Atomic Mass")
-    ax.set_ylabel("Number of Occurences")
-    ax.set_title("Frequency of Standard Deviation - Atomic Mass")
-    
-    st.pyplot(fig)
-
-else:
-    st.error("WRONG")
-
-# Graph 10 Feature: Weighted Standard Deviation
-if "wtd_std_atomic_mass" in train_Data.columns:
-    st.subheader("Weighted Standard Deviation - Atomic Mass")
-    fig, ax = plt.subplots()
-    ax.hist(train_Data["wtd_std_atomic_mass"], bins = 40, color="red")
-    ax.set_xlabel("Weighted Standard Deviation - Atomic Mass")
-    ax.set_ylabel("Number of Occurences")
-    ax.set_title("Frequency of Weighted Standard Deviation - Atomic Mass")
-    
-    st.pyplot(fig)
-
-else:
-    st.error("WRONG")
+elif st.session_state.page == "lg":
+    from logicregression import lt_page
+    lt_page()

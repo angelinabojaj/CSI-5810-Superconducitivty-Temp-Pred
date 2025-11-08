@@ -5,81 +5,36 @@ import matplotlib.pyplot as plt
 
 # Streamlit implemenation
 st.title("CSI 5810: Superconductivity Temperature Prediction App")
-st.subheader("Atomic Mass Graphs")
-
-def go_mass(): 
-    st.session_state.page = "app.py"
-
-def go_fie(): 
-    st.session_state.page = "fie.py"
-
-def go_radius(): 
-    st.session_state.page = "atomicradius.py"
-
-def go_density(): 
-    st.session_state.page = "density.py"
-
-def go_electron(): 
-    st.session_state.page = "electronaffinity.py"
-
-def go_fusion(): 
-    st.session_state.page = "fusionheat.py"
-
-def go_thermal(): 
-    st.session_state.page = "thermalconduc.py"
-
-def go_valence(): 
-    st.session_state.page = "valence.py"
-
-# Side Bar Navigation
-st.sidebar.title("Graphs Broken Down")
-st.sidebar.button("Atomic Mass", key = "mass", on_click="app")
-st.sidebar.button("FIE", key = "fie", on_click="fie")
-st.sidebar.button("Atomic Radius", key = "radius", on_click= "atomicradius")
-st.sidebar.button("Density", key = "den")
-st.sidebar.button("Electron Affinity", key = "ea")
-st.sidebar.button("Fusion Heat", key = "fus")
-st.sidebar.button("Thermal Conductvitiy", key = "thermal")
-st.sidebar.button("Valence", key = "val")
-st.sidebar.button("Logic Regression Graphs")
-
-# Data Imported
-train_Data = pd.read_csv("train.csv")
-unique_m_Data = pd.read_csv("unique_m.csv")
-
-# train.csv
-    # Details:
-print(train_Data.head())
-print("Train Header Column Names:")
-print(list(train_Data.columns))
-
-# unique_m.csv
-    # Details: 
-print(unique_m_Data.head())
-
-# ------------------------------------------------------------------------------------------------ #
-# Atomic Radius (Yellow)
-    # Description
-    
-# Graph 1 Feature: Mean Atomic Mass
-
-# Graph 2 Feature: Weighted Mean
-
-# Graph 3 Feature: Geometric Mean
-
-# Graph 4 Feature: Weighted Geometric Mean
-
-# Graph 5 Feature: Entropy
-
-# Graph 6 Feature:Weighted Entropy
-
-# Graph 7 Feature:Range
-
-# Graph 8 Feature:Weighted Range
-
-# Graph 9 Feature:Standard Deviation
-
-# Graph 10 Feature: Weighted Standard Deviation
+st.subheader("Atomic Radius Graphs")
 
 
-# ------------------------------------------------------------------------------------------------ #
+def rad_page():
+   # Streamlit implemenation
+    st.subheader("Atomic Radius Graphs")
+
+    # Data Imported
+    train_Data = pd.read_csv("train.csv")
+    unique_m_Data = pd.read_csv("unique_m.csv")
+     
+    def histogram(column, feature):
+            if column in train_Data.columns:
+                st.subheader(f"{feature}")
+                fig, ax = plt.subplots()
+                ax.hist(train_Data[column], bins = 40, color="yellow")
+                ax.set_xlabel(feature)
+                ax.set_ylabel("Number of Occurences")
+                ax.set_title(f"Frequency of {feature}")
+                st.pyplot(fig)
+            else:
+                st.error("WRONG")
+        
+    histogram("mean_fie", "Mean - FIE")
+    histogram("wtd_mean_atomic_mass", "Weighted Mean - FIE")
+    histogram("gmean_fie", "Geometric Mean - FIE")
+    histogram("wtd_gmean_fie", "Weighted Geometric Mean - FIE")
+    histogram("entropy_fie", "Entropy - FIE")
+    histogram("wtd_entropy_fie", "Weighted Entropy - FIE")
+    histogram("range_fie", "Range - FIE")
+    histogram("wtd_range_fie", " Weighted Range - FIE")
+    histogram("std_fie", "Standard Deviation - FIE")
+    histogram("wtd_std_fie", "Weighted Standard Deviation - FIE")
