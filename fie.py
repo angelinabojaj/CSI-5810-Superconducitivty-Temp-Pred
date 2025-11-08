@@ -28,7 +28,7 @@ def fie_page():
                 st.error("WRONG")
         
     histogram("mean_fie", "Mean - FIE")
-    histogram("wtd_mean_atomic_mass", "Weighted Mean - FIE")
+    histogram("wtd_mean_fie", "Weighted Mean - FIE")
     histogram("gmean_fie", "Geometric Mean - FIE")
     histogram("wtd_gmean_fie", "Weighted Geometric Mean - FIE")
     histogram("entropy_fie", "Entropy - FIE")

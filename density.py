@@ -9,7 +9,7 @@ st.subheader("Atomic Mass Graphs")
 
 def density_page():
     # Streamlit implemenation
-    st.subheader("Atomic Radius Graphs")
+    st.subheader("Density Graphs")
 
     # Data Imported
     train_Data = pd.read_csv("train.csv")
@@ -19,7 +19,7 @@ def density_page():
             if column in train_Data.columns:
                 st.subheader(f"{feature}")
                 fig, ax = plt.subplots()
-                ax.hist(train_Data[column], bins = 40, color="yellow")
+                ax.hist(train_Data[column], bins = 40, color="green")
                 ax.set_xlabel(feature)
                 ax.set_ylabel("Number of Occurences")
                 ax.set_title(f"Frequency of {feature}")
@@ -27,13 +27,13 @@ def density_page():
             else:
                 st.error("WRONG")
         
-    histogram("mean_fie", "Mean - FIE")
-    histogram("wtd_mean_atomic_mass", "Weighted Mean - FIE")
-    histogram("gmean_fie", "Geometric Mean - FIE")
-    histogram("wtd_gmean_fie", "Weighted Geometric Mean - FIE")
-    histogram("entropy_fie", "Entropy - FIE")
-    histogram("wtd_entropy_fie", "Weighted Entropy - FIE")
-    histogram("range_fie", "Range - FIE")
-    histogram("wtd_range_fie", " Weighted Range - FIE")
-    histogram("std_fie", "Standard Deviation - FIE")
-    histogram("wtd_std_fie", "Weighted Standard Deviation - FIE")
+    histogram("mean_Density", "Mean - Density")
+    histogram("wtd_mean_Density", "Weighted Mean - Density")
+    histogram("gmean_Density", "Geometric Mean - Density")
+    histogram("wtd_gmean_Density", "Weighted Geometric Mean - Density")
+    histogram("entropy_Density", "Entropy - Density")
+    histogram("wtd_entropy_Density", "Weighted Entropy - Density")
+    histogram("range_Density", "Range - Density")
+    histogram("wtd_range_Density", " Weighted Range - Density")
+    histogram("std_Density", "Standard Deviation - Density")
+    histogram("wtd_std_Density", "Weighted Standard Deviation - Density")
