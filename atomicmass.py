@@ -4,6 +4,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def atomicmass_page():
+    # Streamlit
+    st.subheader("Atomic Mass Graphs")
+
     # Data Imported
     train_Data = pd.read_csv("train.csv")
     unique_m_Data = pd.read_csv("unique_m.csv")

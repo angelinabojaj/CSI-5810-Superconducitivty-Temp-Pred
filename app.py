@@ -50,7 +50,7 @@ def go_lg():
     st.session_state.page = "lg"
 
 # Side Bar Navigation
-st.sidebar.title("Graphs Broken Down")
+st.sidebar.title("Graphs")
 st.sidebar.button("Home Page", key = "home", on_click=home)
 st.sidebar.button("Atomic Mass", key = "mass", on_click=go_mass)
 st.sidebar.button("FIE", key = "fie", on_click=go_fie)
