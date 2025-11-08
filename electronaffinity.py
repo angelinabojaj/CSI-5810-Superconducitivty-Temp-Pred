@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 def electron_page():
     # Streamlit implemenation
-    st.subheader("Atomic Radius Graphs")
+    st.subheader("Electron Affinity Graphs")
 
     # Data Imported
     train_Data = pd.read_csv("train.csv")
@@ -15,7 +15,7 @@ def electron_page():
             if column in train_Data.columns:
                 st.subheader(f"{feature}")
                 fig, ax = plt.subplots()
-                ax.hist(train_Data[column], bins = 40, color="yellow")
+                ax.hist(train_Data[column], bins = 40, color="blue")
                 ax.set_xlabel(feature)
                 ax.set_ylabel("Number of Occurences")
                 ax.set_title(f"Frequency of {feature}")
@@ -23,13 +23,13 @@ def electron_page():
             else:
                 st.error("WRONG")
         
-    histogram("mean_fie", "Mean - FIE")
-    histogram("wtd_mean_atomic_mass", "Weighted Mean - FIE")
-    histogram("gmean_fie", "Geometric Mean - FIE")
-    histogram("wtd_gmean_fie", "Weighted Geometric Mean - FIE")
-    histogram("entropy_fie", "Entropy - FIE")
-    histogram("wtd_entropy_fie", "Weighted Entropy - FIE")
-    histogram("range_fie", "Range - FIE")
-    histogram("wtd_range_fie", " Weighted Range - FIE")
-    histogram("std_fie", "Standard Deviation - FIE")
-    histogram("wtd_std_fie", "Weighted Standard Deviation - FIE")
+    histogram("mean_ElectronAffinity", "Mean - Electron Affinity")
+    histogram("wtd_mean_ElectronAffinity", "Weighted Mean - Electron Affinity")
+    histogram("gmean_ElectronAffinity", "Geometric Mean - Electron Affinity")
+    histogram("wtd_gmean_ElectronAffinity", "Weighted Geometric Mean - Electron Affinity")
+    histogram("entropy_ElectronAffinity", "Entropy - Electron Affinity")
+    histogram("wtd_entropy_ElectronAffinity", "Weighted Entropy - Electron Affinity")
+    histogram("range_ElectronAffinity", "Range - Electron Affinity")
+    histogram("wtd_range_ElectronAffinity", " Weighted Range - Electron Affinity")
+    histogram("std_ElectronAffinity", "Standard Deviation - Electron Affinity")
+    histogram("wtd_std_ElectronAffinity", "Weighted Standard Deviation - Electron Affinity")

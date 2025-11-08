@@ -6,4 +6,8 @@ import matplotlib.pyplot as plt
 def ct_page():
     return
 
-    # MEAN & STD
+    # Mean (Scatter Graph)
+    
+    
+    # Standard Deviation (Scatter Graph)
+    

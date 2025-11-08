@@ -15,7 +15,7 @@ def fusion_page():
             if column in train_Data.columns:
                 st.subheader(f"{feature}")
                 fig, ax = plt.subplots()
-                ax.hist(train_Data[column], bins = 40, color="yellow")
+                ax.hist(train_Data[column], bins = 40, color="purple")
                 ax.set_xlabel(feature)
                 ax.set_ylabel("Number of Occurences")
                 ax.set_title(f"Frequency of {feature}")

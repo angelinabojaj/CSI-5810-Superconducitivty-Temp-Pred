@@ -4,9 +4,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Streamlit implemenation
-st.title("CSI 5810: Superconductivity Temperature Prediction App")
-st.subheader("Atomic Radius Graphs")
-
 
 def rad_page():
    # Streamlit implemenation
