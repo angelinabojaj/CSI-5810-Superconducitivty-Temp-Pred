@@ -5,8 +5,6 @@ import matplotlib.pyplot as plt
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-from sklearn.naive_bayes import GaussianNB
-
 
 def lg_page():
     st.title("Classifer Models")
@@ -19,8 +17,6 @@ def lg_page():
     feature = st.multiselect("Selected Feature", [col for col in train_Data.columns if col != target])
     
     # KNN Classifer
-    
-    # Naive Bayes Classifer
     
     # Linear Logic Regression Models / Classifer
     
