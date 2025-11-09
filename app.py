@@ -7,7 +7,11 @@ import matplotlib.pyplot as plt
 def home():
     st.title("CSI 5810: Superconductivity Temperature Prediction App")
     st.subheader("Introduction")
+    st.text("Welcome to my application demonstrating data relevant to predicting superconductivitity temperature. Please note that the focus of the application is the graphs themselves rather than the aesthetics.")
     st.set_page_config(initial_sidebar_state="expanded")
+    plt.close("all")
+    st.session_state.page = "home"
+
 
 def go_mass(): 
     plt.close("all")
